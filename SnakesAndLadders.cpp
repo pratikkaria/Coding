@@ -1,52 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-pair<int,int> getNextMove(int i,int j)
-{
-  if(i%2==0)
-  {
-    j = j + 1;
-    if(j>9)
-    {
-      i = i+1;
-      j = 9 - (j%10);
-    }
-
-    return make_pair(i,j);
-  }
-  else
-  {
-    j = j - 1;
-    if(j<0)
-    {
-      i = i + 1;
-      j = 0 - j - 1;
-    }
-    return make_pair(i,j);
-  }
-}
-pair<int,int> getPrevMove(int i,int j,int k)
-{
-  if(i%2==0)
-  {
-    j = j - k;
-    if(j<0)
-    {
-      i = i -1;
-      j = 0 - j - 1;
-    }
-    return make_pair(i,j);
-  }
-  else
-  {
-    j = j + k;
-    if(j>9)
-    {
-      i = i - 1;
-      j = 9 - (j%10);
-    }
-    return make_pair(i,j);
-  }
-}
 int quickestWayUp(vector<vector<int>> ladders, vector<vector<int>> snakes)
 {
   unordered_map<int,vector<int>> adj;

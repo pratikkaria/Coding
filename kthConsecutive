@@ -1,49 +1,41 @@
 #include<bits/stdc++.h>
 using namespace std;
+long long int arr[50]; 
+#define FAST_IO(value) std :: ios :: sync_with_stdio(value); std :: cin.tie(NULL)
 string getKth(int k)
 {
-  if(k==1)
-    return "1";
-  if(k==2)
-    return "10";
-  vector<string> out;
-  out.push_back("1");
-  out.push_back("10");
-  int a = 1, b = 1;
-  int c = 2;
-  k = k - 2;
-  while(1)
+  string s = "";
+  bool flag = false;
+  for(int i=39;i>=0;i--)
   {
-    int x = out.size();
-    for(int i=b;i>0;i--)
+    if(arr[i]<=k)
     {
-      string temp = out[x-i] + '1';
-      out.push_back(out[x-i]+'0');
-      k--;
-      if(k==0)
-        break;
-      if(temp[temp.size()-2]!='1')
-      {
-        out.push_back(temp);
-        k--;
-        if(k==0)
-          break;
-      }
+      flag = true;
+      s = s + "1";
+      k = k - arr[i];
+      continue;
     }
-    if(k==0)
-      break;
-    a = b;
-    b = c;
-    c = a + b;
-  }
 
-  return out.back();
+    if(flag)
+      s = s + "0";
+  }
+  return s;
 }
 int main()
 {
-  int k;
-  cin>>k;
-  string str = getKth(k);
-  cout<<str<<endl;
+  FAST_IO(0);
+  arr[0]=1;
+  arr[1]=2;
+  for(int i=2;i<40;i++)
+      arr[i] = arr[i-1] + arr[i-2]; 
+  int t;
+  cin>>t;
+  while(t--)
+  {
+      int k;
+      cin>>k;
+      string str = getKth(k);
+      cout<<str<<endl;
+  }
   return 0;
 }
